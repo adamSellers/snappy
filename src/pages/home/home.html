@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      <img src="assets/images/logo.png" alt="A sweet camera app" (click)="buildData()" />
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="playSlideshow()">
+        <ion-icon name="play"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!--add conditional button if today's photo doesn't already exist -->
+    <button ion-item *ngIf="!photoTaken" detail-none (click)="takePhoto()">
+      <img src="assets/images/smile.png" alt="a smiley face">
+    </button>
+    <ion-item-sliding *ngFor="let photo of photos">
+      <ion-item>
+        <img [src]="photo.image" />
+        <ion-badge item-right color="light">{{photo.date | daysAgo}} days ago</ion-badge>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button icon-only color="light" (click)="removePhoto(photo)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
